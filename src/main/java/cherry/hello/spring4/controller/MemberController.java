@@ -1,7 +1,10 @@
 package cherry.hello.spring4.controller;
 
+import cherry.hello.spring4.model.Member;
+import cherry.hello.spring4.service.MemberService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +16,10 @@ public class MemberController {
 
 
     private Logger logger = LogManager.getLogger(MemberController.class);
+
+    @Autowired
+    MemberService msrv;
+
     @RequestMapping(value = "/member/join", method = RequestMethod.GET)
     public String join(Model m) {
 
@@ -22,9 +29,16 @@ public class MemberController {
     }
 
     @RequestMapping(value = "/member/join", method = RequestMethod.POST)
-    public String joinok(Model m) {
+    public String joinok(Member m) {
 
         logger.info("member/joinok 호출!");
+        String viewName = "/member/fail";
+
+        if (msrv.saveMember(m))
+        viewName = "redirect:/member/login";  //회원가입 처리
+//
+//        logger.info(m.getUserid());
+//        logger.info(m.getEmail());
 
         return "redirect:/member/login"; //내부에서 로그인을 호출하기 때문에 tiles 빼준다
     }
