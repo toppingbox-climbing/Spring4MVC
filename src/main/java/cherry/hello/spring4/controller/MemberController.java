@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
@@ -12,7 +13,7 @@ public class MemberController {
 
 
     private Logger logger = LogManager.getLogger(MemberController.class);
-    @RequestMapping("/member/join")
+    @RequestMapping(value = "/member/join", method = RequestMethod.GET)
     public String join(Model m) {
 
         logger.info("member/join 호출!");
@@ -20,13 +21,29 @@ public class MemberController {
         return "member/join.tiles";
     }
 
+    @RequestMapping(value = "/member/join", method = RequestMethod.POST)
+    public String joinok(Model m) {
 
-    @RequestMapping("/member/login")
+        logger.info("member/joinok 호출!");
+
+        return "redirect:/member/login"; //내부에서 로그인을 호출하기 때문에 tiles 빼준다
+    }
+
+
+
+    @RequestMapping(value = "/member/login", method = RequestMethod.GET)
     public String login(Model m) {
 
         logger.info("member/login 호출!");
 
         return "member/login.tiles";
+    }
+    @RequestMapping(value = "/member/login", method = RequestMethod.POST)
+    public String loginok(Model m) {
+
+        logger.info("member/loginok 호출!");
+
+        return "redirect:/member/myinfo"; //내부에서 로그인을 호출하기 때문에 tiles 빼준다
     }
 
 
