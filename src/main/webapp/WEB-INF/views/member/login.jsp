@@ -11,7 +11,8 @@
             <input type="password" name="passwd" id="passwd"></div>
 
         <div><label></label>
-            <button type="button" class="btn btn-primary" id="loinbtn">로그인</button>
+            <button type="button" class="btn btn-primary" id="loginbtn">로그인</button>
         </div>
     </form>
 </main>
+<script src="/assets/js/member.js"></script>
