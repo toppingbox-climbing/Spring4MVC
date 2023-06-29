@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cherry.hello.spring4</groupId>
+    <groupId>zzyzzy.hello.spring4</groupId>
     <artifactId>Spring4MVC</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>Spring4MVC</name>
@@ -15,9 +15,10 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
         <org.springframework-version>4.3.30.RELEASE</org.springframework-version>
+
         <slf4j.version>1.7.36</slf4j.version>
         <log4j.version>2.12.4</log4j.version>
-        <junit.version>5.9.2</junit.version>
+        <junit.version>4.13.2</junit.version>
     </properties>
 
     <dependencies>
@@ -26,7 +27,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${org.springframework-version}</version>
-
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -38,17 +38,19 @@
             <artifactId>spring-jdbc</artifactId>
             <version>${org.springframework-version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
 
-        <!-- web, jstl-->
-
+        <!-- web, jstl -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
-
-
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>javax.servlet.jsp-api</artifactId>
@@ -94,15 +96,20 @@
             <version>${log4j.version}</version>
         </dependency>
 
-        <!-- titles -->
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
+        </dependency>
 
+        <!-- tiles -->
         <dependency>
             <groupId>org.apache.tiles</groupId>
             <artifactId>tiles-servlet</artifactId>
             <version>3.0.8</version>
-        </dependency
-
-        >
+        </dependency>
         <dependency>
             <groupId>org.apache.tiles</groupId>
             <artifactId>tiles-jsp</artifactId>
@@ -123,30 +130,14 @@
             <version>2.7.9</version>
         </dependency>
 
-
-
+        <!-- junit4 -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
 
-        <!-- lombok -->
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>
