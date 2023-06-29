@@ -6,7 +6,7 @@
         passwd      varchar(18)   not null,
         name        varchar(10)   not null,
         email       varchar(50)   not null,
-        regdate     datetime(50)  default    current_timestamp,
+        regdate     datetime  default    current_timestamp,
         primary key (mno)
     );
 
@@ -20,7 +20,7 @@
         bno         int             auto_increment,
         title       varchar(50)     not null,
         userid      varchar(18)     not null,
-        regdate     datetime(50)    default    current_timestamp,
+        regdate     datetime    default    current_timestamp,
         views       int             default 0,
         contents    text            not null,
         primary key (bno),

@@ -11,8 +11,8 @@
         <div><label for="passwd">비밀번호</label>
             <input type="password" name="passwd" id="passwd"></div>
 
-        <div><label for="repw">비밀번호확인</label>
-            <input type="password" name="repw" id="repw"></div>
+        <div><label for="repwd">비밀번호확인</label>
+            <input type="password" name="repwd" id="repwd"></div>
 
         <div><label for="name">이름</label>
             <input type="text" name="name" id="name"></div>

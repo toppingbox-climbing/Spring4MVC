@@ -7,13 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
-
 @Controller
 public class IndexController {
 
     // 로거 설정 : getLogger(로깅할 클래스명)
     private Logger logger = LogManager.getLogger(IndexController.class);
-
 
     // http://localhost:8080/ 호출시 실행
     @RequestMapping("/")
@@ -28,8 +26,4 @@ public class IndexController {
        // return "index";  // jsp view resolver
         return "index.tiles";
     }
-
-
 }
-
-
