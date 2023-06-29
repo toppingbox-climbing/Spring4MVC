@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MemberController {
 
-
     private Logger logger = LogManager.getLogger(MemberController.class);
 
     @Autowired
@@ -27,12 +26,11 @@ public class MemberController {
 
         return "member/join.tiles";
     }
-
     @RequestMapping(value = "/member/join", method = RequestMethod.POST)
     public String joinok(Member m) {
 
         logger.info("member/joinok 호출!");
-        String viewName = "/member/fail";
+        String viewName = "redirect:/member/fail";
 
         if (msrv.saveMember(m))
         viewName = "redirect:/member/login";  //회원가입 처리
@@ -42,9 +40,6 @@ public class MemberController {
 
         return "redirect:/member/login"; //내부에서 로그인을 호출하기 때문에 tiles 빼준다
     }
-
-
-
     @RequestMapping(value = "/member/login", method = RequestMethod.GET)
     public String login(Model m) {
 
@@ -52,15 +47,17 @@ public class MemberController {
 
         return "member/login.tiles";
     }
-    @RequestMapping(value = "/member/login", method = RequestMethod.POST)
-    public String loginok(Model m) {
 
+    @RequestMapping(value = "/member/login", method = RequestMethod.POST)
+    public String loginok(Member m) {
+        String viewName = "redirect:/member/loginfail";
         logger.info("member/loginok 호출!");
 
-        return "redirect:/member/myinfo"; //내부에서 로그인을 호출하기 때문에 tiles 빼준다
+        if (msrv.loginMember(m))
+            viewName =  "redirect:/member/myinfo";
+
+        return viewName; //"redirect:/member/myinfo"; //내부에서 로그인을 호출하기 때문에 tiles 빼준다
     }
-
-
     @RequestMapping("/member/myinfo")
     public String myinfo(Model m) {
 
@@ -68,8 +65,4 @@ public class MemberController {
 
         return "member/myinfo.tiles";
     }
-
-
-
-
 }
