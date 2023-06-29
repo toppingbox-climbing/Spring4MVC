@@ -34,7 +34,7 @@ public class MemberDAOUnitTest {
     @Test
     public void loginMember() throws Exception {
         Member m = new Member();
-        m.setUserid("abc123a");
+        m.setUserid("abc123");
         m.setPasswd("987xyz");
 
         //assertEquals(테스트메서드, 검증값)
@@ -43,6 +43,15 @@ public class MemberDAOUnitTest {
         //abc123a 가 들어가면 expected 1, actual 0 왜냐면 없는 값이니까
 
         assertNotNull(mdao.loginMember(m));
+
+    }
+    @Test
+    public void selectOneMember() throws Exception {
+        String userid = "abc123";
+
+        System.out.println(mdao.selectOneMember(userid));
+        assertNotNull(mdao.selectOneMember(userid));
+
 
     }
 
