@@ -63,9 +63,23 @@ public class MemberController {
 
         return viewName; //"redirect:/member/myinfo"; //내부에서 로그인을 호출하기 때문에 tiles 빼준다
     }
+
+    @RequestMapping("/member/logout")
+    public String logout(HttpSession sess) {
+        logger.info("member/logout 호출!");
+
+        sess.invalidate(); // 세션 객체 제거
+
+        return "redirect:/";
+    }
+
     @RequestMapping("/member/myinfo")
     public String myinfo(Model m, HttpSession sess) {
         logger.info("member/myinfo 호출!");
+
+        // 세션객체가 없을 경우 로그인 페이지로 이동
+        if (sess.getAttribute("member") == null)
+            return "redirect:/member/login";
         String userid =
                 ((Member) sess.getAttribute("member")).getUserid();
 
