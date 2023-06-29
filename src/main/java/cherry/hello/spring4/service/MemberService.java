@@ -7,7 +7,5 @@ public interface MemberService {
 
 
     boolean saveMember(Member m);
-
-
-
+    boolean loginMember(Member m);
 }
