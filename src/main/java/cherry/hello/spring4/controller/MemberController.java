@@ -86,4 +86,11 @@ public class MemberController {
         m.addAttribute("member", msrv.readOneMember(userid));
         return "member/myinfo.tiles";
     }
+
+    @RequestMapping("/member/loginfail")
+    public String loginfail() {
+        logger.info("member/loginfail 호출!");
+
+        return "member/loginfail.tiles";
+    }
 }
