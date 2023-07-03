@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,5 +33,23 @@ public class BoardDAOUnitTest {
         assertEquals(results.size(),15);
         System.out.println(results);
     }
+    @Test
+    public void selectOneBoard() throws Exception {
+       String bno = "450";
+
+        Board result = bdao.selectOneBoard(bno);
+
+        assertNotNull(result);
+        System.out.println(result);
+    }
+    @Test
+    @Transactional
+    public void insertBoard() throws Exception {
+        Board bd = new Board(null,"테스트","abc123",null,null,"컨텐츠");
+
+        assertEquals(bdao.insertBoard(bd), 1);
+//        System.out.println(result);
+    }
+
 
 }
