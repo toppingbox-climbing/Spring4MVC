@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
@@ -17,7 +18,14 @@ public class MemberServiceAdvice {
 
     private Logger logger = LogManager.getLogger(MemberServiceAdvice.class);
 
-    @Around("execution(* cherry.hello.spring4.controller.MemberController.myinfo(..))")
+    @Pointcut("execution(* cherry.hello.spring4.controller.MemberController.myinfo(..))")
+    public void myInfoPoint() {}
+
+    @Pointcut("execution(* cherry.hello.spring4.controller.MemberController.join(..))")
+    public void joinPoint() {}
+
+    @Around("myInfoPoint()") //-이게 어드바이스
+
     public Object myinfoAOPProcess(ProceedingJoinPoint pjp)
                                             throws Throwable {
         logger.info("myinfoAOPProcess 호출!!");
@@ -32,6 +40,30 @@ public class MemberServiceAdvice {
         // 포인트컷 대상 메서드 실행
         if (sess.getAttribute("member") == null)
             return "redirect:/member/login";
+
+        Object obj = pjp.proceed();
+        return obj;
+    }
+
+
+        @Around("joinPoint()") //-이게 어드바이스
+
+        public Object joinAOPProcess(ProceedingJoinPoint pjp)
+                                            throws Throwable {
+        logger.info("joinAOPProcess 호출!!");
+        HttpSession sess = null;
+
+        // join point 에서 넘겨준 매개변수에서 원하는 객체 추출
+        for(Object o : pjp.getArgs()) {
+            if (o instanceof HttpSession)
+                sess = (HttpSession) o;
+        }
+
+        // 포인트컷 대상 메서드 실행
+            // 로그인 안 했다면 -> join으로 이동
+            // 로그인 안 했다면 -> myinfo으로 이동
+        if (sess.getAttribute("member") != null)
+            return "redirect:/member/myinfo";
 
         //
         Object obj = pjp.proceed();
