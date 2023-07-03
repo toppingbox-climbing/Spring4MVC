@@ -45,4 +45,13 @@ public class BoardServiceUnitTest {
         System.out.println(result);
 
     }
+
+    @Test
+    @Transactional
+    public void saveBoard() throws Exception {
+        Board bd = new Board(null,"테스트","abc123",null,null,"컨텐츠");
+
+        assertEquals(bsrv.saveBoard(bd), true);
+//        System.out.println(result);
+    }
 }
