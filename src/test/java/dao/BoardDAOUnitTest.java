@@ -12,6 +12,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:spring/servlet-context.xml",
