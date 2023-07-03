@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service("bsrv")
-public class BoardServiceImpl implements BoardService  {
+public class BoardServiceImpl implements BoardService {
 
     @Autowired BoardDAO bdao;
     @Override
@@ -16,5 +16,10 @@ public class BoardServiceImpl implements BoardService  {
         int snum = (cpg - 1) * 15;
 
         return bdao.selectBoard(snum);
+    }
+
+    @Override
+    public Board readOneBoard(String bno) {
+        return bdao.selectOneBoard(bno);
     }
 }
