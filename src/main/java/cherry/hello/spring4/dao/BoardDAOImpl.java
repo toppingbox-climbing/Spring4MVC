@@ -1,6 +1,7 @@
 package cherry.hello.spring4.dao;
 
 import cherry.hello.spring4.model.Board;
+import javafx.scene.chart.Chart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,13 +15,12 @@ import java.util.List;
 @Repository("bdao")
 public class BoardDAOImpl implements BoardDAO {
 
-    @Value("#{sql['selectBoard']}")
-    private String selectSQL;
-    @Value("#{sql['selectOneBoard']}")
-    private String selectOneSQL;
+    @Value("#{sql['selectBoard']}") private String selectSQL;
+    @Value("#{sql['selectOneBoard']}") private String selectOneSQL;
+    @Value("#{sql['viewCountBoard']}") private String viewCountSQL;
+    @Value("#{sql['insertBoard']}") private String insertSQL;
 
-    @Autowired
-    JdbcTemplate jdbcTemplate;
+    @Autowired JdbcTemplate jdbcTemplate;
 
     @Override
     public List<Board> selectBoard(int snum) {
@@ -36,10 +36,25 @@ public class BoardDAOImpl implements BoardDAO {
         Object[] params = new Object[]{bno};
         RowMapper<Board> mapper = new SelectOneMapper();
 
+        // 조회수 \증가
+        jdbcTemplate.update(viewCountSQL, params);
+
         return jdbcTemplate.queryForObject(
                 selectOneSQL, params, mapper);
 
     }
+
+    @Override
+    public int insertBoard(Board bd) {
+        // 매개변수 정의
+        Object[] params = new Object [] {
+                bd.getTitle(), bd.getUserid(), bd.getContents()
+        };
+        //쿼리 실행 : update(sql문, 매개변수)
+        return jdbcTemplate.update(insertSQL, params);
+//        return 0;
+    }
+
 
     private class SelectMapper implements RowMapper<Board> {
         @Override
