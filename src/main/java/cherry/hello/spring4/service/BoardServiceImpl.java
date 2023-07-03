@@ -22,4 +22,13 @@ public class BoardServiceImpl implements BoardService {
     public Board readOneBoard(String bno) {
         return bdao.selectOneBoard(bno);
     }
+
+    @Override
+    public boolean saveBoard(Board bd) {
+        boolean isSaved = false; //boolean 쓸 때 is 붙여야함 변수명만 보고도 불리안인줄 알 수 있게?
+
+        if (bdao.insertBoard(bd) > 0) isSaved = true;
+
+        return isSaved;
+    }
 }
